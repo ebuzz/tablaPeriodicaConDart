@@ -1297,7 +1297,7 @@ void DataLoad(){
                                                        ]
                                        },
                                        {
-                                         "group": "Element Poor Carbon p",
+                                         "group": "metalesbloquep",
                                          "position": 13,
                                          "name": "Flerovium",
                                          "number": 114,
@@ -1331,7 +1331,7 @@ void DataLoad(){
                                                        ]
                                        },
                                        {
-                                         "group": "Element Poor Chalcogen p",
+                                         "group": "metalesbloquep",
                                          "position": 15,
                                          "name": "Livermorium",
                                          "number": 116,
@@ -1348,7 +1348,7 @@ void DataLoad(){
                                                        ]
                                        },
                                        {
-                                         "group": " ",
+                                         "group": "nometales",
                                          "position": 16,
                                          "name": "Ununseptium",
                                          "number": 117,
@@ -1365,7 +1365,7 @@ void DataLoad(){
                                                        ]
                                        },
                                        {
-                                         "group": " ",
+                                         "group": "gasesnobles",
                                          "position": 17,
                                          "name": "Ununoctium",
                                          "number": 118,
@@ -1914,7 +1914,7 @@ void OnDataLoaded()
   var totalActinoids = new Iterable.generate(file["actinoids"].length, (i) => i);
       for(var position in totalActinoids)
       {
-          var actinoidElement = file["lanthanoids"][position];
+          var actinoidElement = file["actinoids"][position];
           AddElements(actinoidElement,table,row);
       }
   document.body.nodes.add(table);
