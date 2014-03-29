@@ -27,6 +27,77 @@ void LoadList(String mapInfoText,String mapInfoId){
   colorElementList.children.add(newElement);
   
 }
+
+void OnDataLoaded()
+{
+  DataLoad();
+  var table = CreateTable();
+  var row = table.insertRow(-1); 
+  var groups = new Iterable.generate(file["table"].length, (i) => i);
+  
+  //Main elements
+  for(var grupo in groups)
+  {
+    var elems = new Iterable.generate(file["table"][grupo]["elements"].length, (i) => i);
+    for(var ele in elems){
+    var elemento = file["table"][grupo]["elements"][ele];
+    AddElements(elemento,table,row);
+  }
+  }
+  
+  //Lanthanoids
+  var totalLanthanoids = new Iterable.generate(file["lanthanoids"].length, (i) => i);
+      for(var position in totalLanthanoids)
+      {
+          var lanthanoidElement = file["lanthanoids"][position];
+          AddElements(lanthanoidElement,table,row);
+      }
+  //Actinoids
+  var totalActinoids = new Iterable.generate(file["actinoids"].length, (i) => i);
+      for(var position in totalActinoids)
+      {
+          var actinoidElement = file["actinoids"][position];
+          AddElements(actinoidElement,table,row);
+      }
+  document.body.nodes.add(table);
+}
+
+TableElement CreateTable()
+{
+  TableElement table = new TableElement();
+  table.id = "elements";
+  var tBody = table.createTBody();
+  return table;
+}
+
+var counter = 0;
+
+void AddElements(var element,TableElement table,TableRowElement row)
+{
+  var picCell = row.insertCell(-1);
+  var cssClass = element["group"];
+  var invisibleBoxes;
+  if(element["number"] == 1){
+  var auxPicCell = row.insertCell(-1);
+  invisibleBoxes = "";
+  auxPicCell.setInnerHtml(invisibleBoxes);
+  }
+  else{
+    invisibleBoxes = " ";
+  }
+  //Fuck ModelViewController :s
+  
+  String html =
+      '<div class="element $cssClass">' + 
+      '<div >' + element["number"].toString() + ' </div>'
+      '<div class="symbol">' + element["small"] + ' </div>'+
+      '<div class="info">' + element["name"] + ' </div>' +
+      '<div class="info">' + element["molar"].toString() + ' </div>'
+      '</div>';
+  picCell.setInnerHtml(html);
+  counter++;
+}
+
 void DataLoad(){
   file = {
               "table": [
@@ -1884,80 +1955,6 @@ void DataLoad(){
                                                       }
                                                       ]
   };
-  
-}
-void OnDataLoaded()
-{
-  DataLoad();
-  var table = CreateTable();
-  var row = table.insertRow(-1); 
-  var groups = new Iterable.generate(file["table"].length, (i) => i);
-  
-  //Main elements
-  for(var grupo in groups)
-  {
-    var elems = new Iterable.generate(file["table"][grupo]["elements"].length, (i) => i);
-    for(var ele in elems){
-    var elemento = file["table"][grupo]["elements"][ele];
-    AddElements(elemento,table,row);
-  }
-  }
-  
-  //Lanthanoids
-  var totalLanthanoids = new Iterable.generate(file["lanthanoids"].length, (i) => i);
-      for(var position in totalLanthanoids)
-      {
-          var lanthanoidElement = file["lanthanoids"][position];
-          AddElements(lanthanoidElement,table,row);
-      }
-  //Actinoids
-  var totalActinoids = new Iterable.generate(file["actinoids"].length, (i) => i);
-      for(var position in totalActinoids)
-      {
-          var actinoidElement = file["actinoids"][position];
-          AddElements(actinoidElement,table,row);
-      }
-  document.body.nodes.add(table);
-}
-
-TableElement CreateTable()
-{
-  TableElement table = new TableElement();
-  table.id = "elements";
-  var tBody = table.createTBody();
-  return table;
-}
-
-var counter = 0;
-
-void AddElements(var element,TableElement table,TableRowElement row)
-{
-  var picCell = row.insertCell(-1);
-  var cssClass = element["group"];
-  var invisibleBoxes;
-  if(element["number"] == 1){
-  var auxPicCell = row.insertCell(-1);
-  invisibleBoxes = "";
-  auxPicCell.setInnerHtml(invisibleBoxes);
-  }
-  else{
-    invisibleBoxes = " ";
-  }
-  //Fuck ModelViewController :s
-  
-  String html =
-      '<div class="element $cssClass">' + 
-      '<div >' + element["number"].toString() + ' </div>'
-      '<div class="symbol">' + element["small"] + ' </div>'+
-      '<div class="info">' + element["name"] + ' </div>' +
-      '<div class="info">' + element["molar"].toString() + ' </div>'
-      '</div>';
-  picCell.setInnerHtml(html);
-  counter++;
-}
-
-void AgregaEspacios()
-{
   
 }
 
