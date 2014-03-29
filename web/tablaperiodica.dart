@@ -1,8 +1,31 @@
 import 'dart:html';
 
 var file;
+UListElement colorElementList;
+
 void main() {
   OnDataLoaded();
+  var info = {
+              'alkali' : 'Alcalinos',
+              'alcalinoterreos' : 'Alcalinoterreos',
+              'metalestransicion' : 'Metales Transicion',
+              'lantanidos' : 'Lantanidos',
+              'actinidos' : 'Actinidos',
+              'metalesbloquep' : 'Metales Bloque P',
+              'nometales' : 'No metales',
+              'gasesnobles' : 'Gases Nobles',
+              
+              
+  };
+  info.forEach((id,text) => LoadList(text,id));
+}
+void LoadList(String mapInfoText,String mapInfoId){
+  colorElementList = querySelector("#colorElementList");
+  var newElement = new LIElement();
+  newElement.text = mapInfoText;
+  newElement.id = mapInfoId;
+  colorElementList.children.add(newElement);
+  
 }
 void DataLoad(){
   file = {
@@ -11,7 +34,7 @@ void DataLoad(){
                           "wiki": "http://en.wikipedia.org/wiki/Period%201%20element",
                           "elements": [
                                        {
-                                         "group": "",
+                                         "group": "none",
                                          "position": 0,
                                          "number": 1,
                                          "name": "Hydrogen",
@@ -699,7 +722,7 @@ void DataLoad(){
                                                        ]
                                        },
                                        {
-                                         "group": "Element Poor Carbon p",
+                                         "group": "metalesbloquep",
                                          "position": 13,
                                          "name": "Tin",
                                          "number": 50,
@@ -744,7 +767,7 @@ void DataLoad(){
                                                        ]
                                        },
                                        {
-                                         "group": "Element Halogen p",
+                                         "group": "nometales",
                                          "position": 16,
                                          "name": "Iodine",
                                          "number": 53,
@@ -1863,21 +1886,37 @@ void DataLoad(){
   };
   
 }
-void OnDataLoaded(){
+void OnDataLoaded()
+{
   DataLoad();
-  //print(file["table"][0]["elements"][0]["number"]);
   var table = CreateTable();
-  //List data = [1,2,3,4,5,6];
   var row = table.insertRow(-1); 
   var groups = new Iterable.generate(file["table"].length, (i) => i);
-
-  for(var grupo in groups){
+  
+  //Main elements
+  for(var grupo in groups)
+  {
     var elems = new Iterable.generate(file["table"][grupo]["elements"].length, (i) => i);
     for(var ele in elems){
     var elemento = file["table"][grupo]["elements"][ele];
-    AgregarElementos(elemento,table,row);
-    }
+    AddElements(elemento,table,row);
   }
+  }
+  
+  //Lanthanoids
+  var totalLanthanoids = new Iterable.generate(file["lanthanoids"].length, (i) => i);
+      for(var position in totalLanthanoids)
+      {
+          var lanthanoidElement = file["lanthanoids"][position];
+          AddElements(lanthanoidElement,table,row);
+      }
+  //Actinoids
+  var totalActinoids = new Iterable.generate(file["actinoids"].length, (i) => i);
+      for(var position in totalActinoids)
+      {
+          var actinoidElement = file["lanthanoids"][position];
+          AddElements(actinoidElement,table,row);
+      }
   document.body.nodes.add(table);
 }
 
@@ -1891,7 +1930,8 @@ TableElement CreateTable()
 
 var counter = 0;
 
-void AgregarElementos(var element,TableElement table,TableRowElement row){
+void AddElements(var element,TableElement table,TableRowElement row)
+{
   var picCell = row.insertCell(-1);
   var cssClass = element["group"];
   var invisibleBoxes;
@@ -1905,17 +1945,19 @@ void AgregarElementos(var element,TableElement table,TableRowElement row){
   }
   //Fuck ModelViewController :s
   
-  String picHhtml =
+  String html =
       '<div class="element $cssClass">' + 
       '<div >' + element["number"].toString() + ' </div>'
       '<div class="symbol">' + element["small"] + ' </div>'+
-      '<div class="name">' + element["name"] + ' </div>' +
-      '<div class="molar">' + element["molar"].toString() + ' </div>'
+      '<div class="info">' + element["name"] + ' </div>' +
+      '<div class="info">' + element["molar"].toString() + ' </div>'
       '</div>';
-  picCell.setInnerHtml(picHhtml);
+  picCell.setInnerHtml(html);
   counter++;
 }
 
-void AgregaEspacios(){
+void AgregaEspacios()
+{
   
 }
+

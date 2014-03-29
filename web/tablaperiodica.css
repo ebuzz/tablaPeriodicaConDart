@@ -4,6 +4,21 @@ body{
   overflow-x:scroll;
 }
 
+div.symbol {
+    text-align:center;
+    font-size:1em;
+	/**/
+}
+div.info {
+    text-align:center;
+    font-size:.5em;
+	/**/
+}
+
+section#info{
+  width:400px;
+}
+
 table#elements{
 	border: 0;
 	width: 0;
@@ -26,24 +41,11 @@ table#elements .element {
 	margin: .5em;
 	/**/
 }
-.symbol {
-    text-align:center;
-    font-size:1em;
-	/**/
-}
-.name {
-    text-align:center;
-    font-size:.5em;
-	/**/
-}
-.molar{
-  text-align:center;
-  font-size:.5em;
-}
 
 
 
-table#elements td:hover .element {
+
+table#elements td:hover .element,section#info ul li:hover {
 
 	opacity: 1 !important;
 	z-index: 100;
@@ -54,46 +56,56 @@ table#elements td:hover .element {
 }
 
 
+section#info ul li{
+  list-style:none;
+  margin:.5em;
+  padding:.2em;
+  text-align:center;
+}
 
 /*Colores de los cuadrillos*/
 
-table#elements .root .icon {
-	background-color: rgb(155, 255, 155);
+table#elements .none {
+	background-color: rgb(201, 201, 201);
 }
 
-table#elements .none .icon{
-	background-color: rgb(120, 140, 255);
-}
-
-table#elements .alkali,section#info #alkali  {
+table#elements  .alkali,
+section#info #alkali  {
 	background-color: rgb(255, 150, 80);
 }
 
-table#elements .alcalinoterreos {
+table#elements .alcalinoterreos,
+section#info #alcalinoterreos {
 	background-color: rgb(255, 255, 100);
 }
 
-table#elements .metalestransicion  {
+table#elements .metalestransicion,
+section#info #metalestransicion   {
 	background-color: rgb(234, 156, 220);
 }
 
-table#elements .lantanidos  {
+table#elements .lantanidos,
+section#info #lantanidos   {
 	background-color: rgb(255, 247, 190);
 }
 
-table#elements .actinidos {
+table#elements .actinidos,
+section#info #actinidos  {
 	background-color: rgb(254, 202, 251);
 }
 
-table#elements .metalesbloquep  {
+table#elements .metalesbloquep,
+section#info #metalesbloquep   {
 	background-color: rgb(12, 133, 213);
 }
 
-table#elements .nometales  {
+table#elements .nometales,
+section#info #nometales   {
 	background-color: rgb(47, 233, 34);
 }
 
-table#elements .gasesnobles  {
+table#elements .gasesnobles,
+section#info #gasesnobles   {
 	background-color: rgb(103, 244, 254);
 }
 
